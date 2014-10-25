@@ -20,13 +20,13 @@ int evolve(int* cell) {
 }
 
 static char* any_live_cell_with_fewer_than_two_live_neighbours_dies_as_if_caused_by_under_population() {
-  int cells[3][3] = {
+  int world[3][3] = {
     { 1, 0, 0 },
     { 0, 0, 0 },
     { 0, 0, 0 },
   };
-  assert_equal(evolve(&cells[0][1]) == 0, "should die because has 1 living neighbours");
-  assert_equal(evolve(&cells[2][2]) == 0, "should die because has 0 living neighbours");
+  assert_equal(evolve(&world[0][1]) == 0, "should die because has 1 living neighbours");
+  assert_equal(evolve(&world[2][2]) == 0, "should die because has 0 living neighbours");
   return 0;
 }
 
