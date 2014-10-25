@@ -20,14 +20,18 @@ int evolve(int* cell) {
 }
 
 static char* any_live_cell_with_fewer_than_two_live_neighbours_dies_as_if_caused_by_under_population() {
-  int cells[] = { 0, 0, 0, 1, 1 };
-  assert_equal(evolve(&cells[3]) == 0, "should die because has 1 living neighbours");
-  assert_equal(evolve(&cells[1]) == 0, "should die because has 0 living neighbours");
+  int cells[3][3] = {
+    { 1, 0, 0 },
+    { 0, 0, 0 },
+    { 0, 0, 0 },
+  };
+  assert_equal(evolve(&cells[0][1]) == 0, "should die because has 1 living neighbours");
+  assert_equal(evolve(&cells[2][2]) == 0, "should die because has 0 living neighbours");
   return 0;
 }
 
 static char* any_live_cell_with_two_or_three_live_neighbours_lives_on_to_the_next_generation() {
-  int cells[] = { 0, 0, 0, 1, 1 };
+  /*int cells[] = { 0, 1, 1, 1, 1 };*/
   /*assert_equal();*/
   return 0;
 }
