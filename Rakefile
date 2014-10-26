@@ -2,9 +2,9 @@ task :default => :test
 
 task :clean do
   sh "rm -f gol"
-  sh "rm -f test"
+  sh "rm -f gol_test"
   sh "rm -fr gol.dSYM"
-  sh "rm -fr test.dSYM"
+  sh "rm -fr gol_test.dSYM"
 end
 
 task :run => :clean do
