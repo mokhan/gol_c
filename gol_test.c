@@ -43,7 +43,7 @@ static char* it_returns_the_correct_number_of_living_neighbors() {
     { ' ', ' ', ' ' },
   };
   assert_equal(living_neighbours_for(world, 0, 0) == 0, "should return 0");
-  assert_equal(living_neighbours_for(world, 0, 1) == 2, "should return 2");
+  assert_equal(living_neighbours_for(world, 1, 0) == 2, "should return 2");
   assert_equal(living_neighbours_for(world, 0, 2) == 0, "should return 0");
   return 0;
 }
