@@ -1,58 +1,26 @@
 #include <stdio.h>
-#include "miniunit.h"
 
-int tests_run = 0;
-
-static char* test_foo() {
-  int foo = 7;
-  assert_equal(foo == 7, "error, foo != 7");
-  return 0;
+int living_neighbours_for(char world[][3], int x, int y){
+  int west = world[y][x-1] == 'x' ? 1 : 0;
+  int east = world[y][x+1] == 'x' ? 1 : 0;
+  return west + east;
 }
 
-static char* test_bar() {
-  int bar = 5;
-  assert_equal(bar == 5, "error, bar != 5");
-  return 0;
-}
-
-int evolve(int* cell) {
-  return 0;
-}
-
-static char* any_live_cell_with_fewer_than_two_live_neighbours_dies_as_if_caused_by_under_population() {
-  int world[3][3] = {
-    { 1, 0, 0 },
-    { 0, 0, 0 },
-    { 0, 0, 0 },
-  };
-  assert_equal(evolve(&world[0][1]) == 0, "should die because has 1 living neighbours");
-  assert_equal(evolve(&world[2][2]) == 0, "should die because has 0 living neighbours");
-  return 0;
-}
-
-static char* any_live_cell_with_two_or_three_live_neighbours_lives_on_to_the_next_generation() {
-  /*int cells[] = { 0, 1, 1, 1, 1 };*/
-  /*assert_equal();*/
-  return 0;
-}
-
-static char* all_tests() {
-  run_test(test_foo);
-  run_test(test_bar);
-  run_test(any_live_cell_with_fewer_than_two_live_neighbours_dies_as_if_caused_by_under_population);
-  run_test(any_live_cell_with_two_or_three_live_neighbours_lives_on_to_the_next_generation);
-  return 0;
-}
-
-int main(int argc, char **argv) {
-  char *result = all_tests();
-  if (result != 0) {
-    printf("%s\n", result);
+void evolve(char world[3][3]) {
+  for (int y = 0; y < 3; y++) {
+    for (int x = 0; x < 3; x++) {
+      char* cell = &world[y][x];
+      int neighbours = living_neighbours_for(world, x, y);
+      printf("%d, %d = '%c'. n: %d\n", x, y, *cell, neighbours);
+      world[y][x] = (neighbours >= 2) ? 'x' : ' ';
+    }
   }
-  else {
-    printf("ALL TESTS PASSED\n");
-  }
-  printf("Tests run: %d\n", tests_run);
+}
 
-  return result != 0;
+void print(char world[][3]) {
+  for (int y = 0; y < 3; y++) {
+    for (int x = 0; x < 3; x++) {
+      printf("%c", world[y][x]);
+    }
+  }
 }
