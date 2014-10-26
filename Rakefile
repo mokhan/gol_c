@@ -13,6 +13,6 @@ task :run => :clean do
 end
 
 task :test => :clean do
-  sh "gcc -std=c99 -Wall -g gol.c gol_test.c -o test"
-  sh "./test"
+  sh "gcc -std=c99 -Wall -g gol.c gol_test.c -o gol_test"
+  sh "./gol_test"
 end
