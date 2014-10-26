@@ -19,8 +19,10 @@ void evolve(char world[3][3]) {
 
 void print(char world[][3]) {
   for (int y = 0; y < 3; y++) {
+    printf("%d:", y);
     for (int x = 0; x < 3; x++) {
       printf("%c", world[y][x]);
     }
+    printf("\n");
   }
 }

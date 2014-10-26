@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "gol.h"
 
 int main(int argc, char **argv) {
@@ -7,6 +8,7 @@ int main(int argc, char **argv) {
     { 'x', 'x', 'x' },
     { 'x', 'x', 'x' },
   };
+  system("clear");
   evolve(world);
   print(world);
 }
