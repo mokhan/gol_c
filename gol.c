@@ -1,67 +1,64 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "gol.h"
 #include <time.h>
+#include <math.h>
+#include <string.h>
+#include "gol.h"
 
-Cell find_cell(World world, int x, int y) {
-  for (int i = 0; i < world.number_of_cells; i++) {
-    Cell cell = world.cells[i];
-    if (cell.x == x && cell.y == y) {
-      return cell;
-    }
+int alive(char value) {
+  return value == 'x' ? 1 : 0;
+};
+
+int west_of(char* world, int index) {
+  if (index == 0 || index == 3 || index == 6) {
+    return alive(world[index + 2]);
   }
-  Cell null_cell;
-  null_cell.x = -1;
-  null_cell.y = -1;
-  null_cell.alive = ' ';
-  return null_cell;
+  return alive(world[index - 1]);
 }
 
-int living_neighbours_for(World world, Cell cell){
-  int west = find_cell(world, cell.y, cell.x - 1).alive == 'x' ? 1 : 0;
-  int east = find_cell(world, cell.y, cell.x + 1).alive == 'x' ? 1 : 0;
-  return west + east;
-}
-
-World evolve(World world) {
-  for (int i = 0; i < world.number_of_cells; i++) {
-    Cell cell = world.cells[i];
-    int neighbours = living_neighbours_for(world, cell);
-    cell.alive = (neighbours >= 2) ? 'x' : ' ';
+int east_of(char* world, int index) {
+  if (index == 2 || index == 5 || index == 8) {
+    return alive(world[index - 2]);
   }
-  return world;
+  return alive(world[index + 1]);
 }
 
-void print(World world) {
-  for (int i = 0; i < world.number_of_cells; i++) {
-    Cell cell = world.cells[i];
+int north_of(char* world, int index) {
+  if (index == 0 || index == 1 || index == 2) {
+    return alive(world[index + 6]);
+  }
+  return alive(world[index - 3]);
+}
+
+int south_of(char* world, int index) {
+  if (index == 6 || index == 7 || index == 8) {
+    return alive(world[index - 6]);
+  }
+  return alive(world[index + 3]);
+}
+
+int living_neighbours_for(char* world, int index){
+  return west_of(world, index) + east_of(world, index) + north_of(world, index) + south_of(world, index);
+}
+
+char* evolve(char* world) {
+  int number_of_cells = 9;
+  char new_world[number_of_cells + 1];
+  memset(new_world, ' ', number_of_cells);
+  new_world[number_of_cells] = 0;
+  for (int i = 0; i < number_of_cells; i++) {
+    int neighbours = living_neighbours_for(world, i);
+    new_world[i] = (neighbours >= 2) ? 'x' : ' ';
+  }
+  return new_world;
+}
+
+void print(char* world) {
+  int number_of_cells = 9;
+  for (int i = 0; i < number_of_cells; i++) {
+    char cell = world[i];
     if (i % 3 == 0) { printf("\n---\n"); }
-    printf("%c", cell.alive);
+    printf("%c", cell);
   }
   printf("\n---\n");
-}
-
-char random_life() {
-  /*srand(time(NULL));*/
-  /*return rand() % 7 == 0 ? 'x' : ' ';*/
-  return 'x';
-}
-
-World create_world(int height, int width){
-  World world;
-  Cell* cells = (Cell*)malloc(sizeof(Cell) * (height * width));
-  int cell_number = 0;
-  for (int y = 0; y < height; y++) {
-    for (int x = 0; x < width; x++) {
-      Cell cell;
-      cell.x = x;
-      cell.y = y;
-      cell.alive = random_life();
-      cells[cell_number] = cell;
-      ++cell_number;
-    }
-  }
-  world.cells = cells;
-  world.number_of_cells = height*width;
-  return world;
 }
