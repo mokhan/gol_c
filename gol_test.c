@@ -27,7 +27,7 @@ static char* any_live_cell_with_fewer_than_two_live_neighbours_dies_as_if_caused
 static char* any_live_cell_with_two_live_neighbours_lives_on_to_the_next_generation() {
   printf("TEST: %s\n", __func__);
   char world[3][3] = {
-    { 'x', ' ', 'x' },
+    { 'x', 'x', 'x' },
     { ' ', ' ', ' ' },
     { ' ', ' ', ' ' },
   };
@@ -60,6 +60,18 @@ static char* any_live_cell_with_more_than_three_live_neighbours_dies_as_if_by_ov
   return 0;
 }
 
+static char* any_dead_cell_with_exactly_three_live_neighbours_becomes_a_live_cell_as_if_by_reproduction(){
+  printf("TEST: %s\n", __func__);
+  char world[3][3] = {
+    { ' ', 'x', ' ' },
+    { 'x', ' ', 'x' },
+    { ' ', ' ', ' ' },
+  };
+  char* new_world = evolve(*world);
+  assert_equal(new_world[4] == 'x', "is born because has 3 live neighbors");
+  return 0;
+}
+
 static char* it_returns_the_correct_number_of_living_neighbors() {
   printf("TEST: %s\n", __func__);
   char world[3][3] = {
@@ -86,6 +98,7 @@ static char* all_tests() {
   run_test(any_live_cell_with_two_live_neighbours_lives_on_to_the_next_generation);
   run_test(any_live_cell_with_three_live_neighbours_lives_on_to_the_next_generation);
   run_test(any_live_cell_with_more_than_three_live_neighbours_dies_as_if_by_overcrowding);
+  run_test(any_dead_cell_with_exactly_three_live_neighbours_becomes_a_live_cell_as_if_by_reproduction);
   return 0;
 }
 

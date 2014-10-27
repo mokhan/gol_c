@@ -48,7 +48,11 @@ char* evolve(char* world) {
   new_world[number_of_cells] = 0;
   for (int i = 0; i < number_of_cells; i++) {
     int neighbours = living_neighbours_for(world, i);
-    new_world[i] = (neighbours >= 2 && neighbours <= 3) ? 'x' : ' ';
+    if (alive(world[i])) {
+      new_world[i] = (neighbours >= 2 && neighbours <= 3) ? 'x' : ' ';
+    } else {
+      new_world[i] = neighbours == 3 ? 'x' : ' ';
+    }
   }
   return new_world;
 }
