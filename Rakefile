@@ -1,8 +1,8 @@
 task :default => :test
 
 task :clean do
-  sh "rm -f bin/gol"
-  sh "rm -f bin/gol_test"
+  sh "rm -fr bin"
+  sh "mkdir -p bin"
 end
 
 task :run => :clean do
