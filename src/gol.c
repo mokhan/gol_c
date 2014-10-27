@@ -31,6 +31,7 @@ int living_neighbours_for(char* world, int index){
 char* evolve(char* world) {
   int number_of_cells = 9;
   char* new_world = malloc(sizeof(char) * number_of_cells);
+  memset(new_world, 0, sizeof(char) * number_of_cells);
   for (int i = 0; i < number_of_cells; i++) {
     int neighbours = living_neighbours_for(world, i);
     if (alive(world[i])) {
