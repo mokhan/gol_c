@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 #include "gol.h"
 
 int main(int argc, char **argv) {
@@ -10,10 +11,14 @@ int main(int argc, char **argv) {
     { ' ', ' ', ' ' },
   };
   system("clear");
-  for (int i = 0; i < 5; i++) {
-    evolve(*world);
-    print(*world);
+  char* new_world = *world;
+  int i = 0;
+  while(1) {
+    printf("GENERATION: %d\n", i);
+    print(new_world);
+    new_world = evolve(new_world);
     sleep(1);
     system("clear");
+    ++i;
   }
 }
