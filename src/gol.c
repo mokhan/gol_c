@@ -30,7 +30,7 @@ int living_neighbours_for(char* world, int index){
 
 char* evolve(char* world) {
   int number_of_cells = 9;
-  char new_world[number_of_cells];
+  char* new_world = malloc(sizeof(char) * number_of_cells);
   for (int i = 0; i < number_of_cells; i++) {
     int neighbours = living_neighbours_for(world, i);
     if (alive(world[i])) {
@@ -39,8 +39,7 @@ char* evolve(char* world) {
       new_world[i] = neighbours == 3 ? 'x' : ' ';
     }
   }
-  char* result = new_world;
-  return result;
+  return new_world;
 }
 
 void display(char* world) {
