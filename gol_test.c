@@ -36,6 +36,18 @@ static char* any_live_cell_with_two_live_neighbours_lives_on_to_the_next_generat
   return 0;
 }
 
+static char* any_live_cell_with_three_live_neighbours_lives_on_to_the_next_generation() {
+  printf("TEST: %s\n", __func__);
+  char world[3][3] = {
+    { 'x', ' ', 'x' },
+    { ' ', 'x', ' ' },
+    { ' ', ' ', ' ' },
+  };
+  char* new_world = evolve(*world);
+  assert_equal(new_world[1] == 'x', "lives because has 3 live neighbors");
+  return 0;
+}
+
 static char* it_returns_the_correct_number_of_living_neighbors() {
   printf("TEST: %s\n", __func__);
   char world[3][3] = {
@@ -52,10 +64,6 @@ static char* it_returns_the_correct_number_of_living_neighbors() {
   assert_equal(living_neighbours_for(*world, 6) == 1, "0, 2 should return 1");
   assert_equal(living_neighbours_for(*world, 7) == 0, "1, 2 should return 0");
   assert_equal(living_neighbours_for(*world, 8) == 1, "2, 2 should return 1");
-  return 0;
-}
-
-static char* any_live_cell_with_three_live_neighbours_lives_on_to_the_next_generation() {
   return 0;
 }
 
