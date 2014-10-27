@@ -7,26 +7,10 @@
 
 int alive(char value) { return value == 'x' ? 1 : 0; };
 
-int west_of(int index) {
-  if (index == 0 || index == 3 || index == 6) { return index + 2; }
-  return index - 1;
-}
-
-int east_of(int index) {
-  if (index == 2 || index == 5 || index == 8) { return index - 2; }
-  return index + 1;
-}
-
-int north_of(int index) {
-  if (index == 0 || index == 1 || index == 2) { return index + 6; }
-  return index - 3;
-}
-
-int south_of(int index) {
-  if (index == 6 || index == 7 || index == 8) { return index - 6; }
-  return index + 3;
-}
-
+int west_of(int index) { return (index == 0 || index == 3 || index == 6) ?  index + 2 : index - 1; }
+int east_of(int index) { return (index == 2 || index == 5 || index == 8) ? index - 2 : index + 1; }
+int north_of(int index) { return (index == 0 || index == 1 || index == 2) ? index + 6 : index - 3; }
+int south_of(int index) { return (index == 6 || index == 7 || index == 8) ? index - 6 : index + 3; }
 int north_west_of(int index) { return west_of(north_of(index)); }
 int north_east_of(int index) { return east_of(north_of(index)); }
 int south_west_of(int index) { return west_of(south_of(index)); }
