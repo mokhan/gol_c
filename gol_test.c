@@ -77,17 +77,18 @@ static char* it_returns_the_correct_number_of_living_neighbors() {
   char world[3][3] = {
     { 'x', ' ', 'x' },
     { ' ', ' ', ' ' },
-    { ' ', ' ', ' ' },
+    { 'x', ' ', 'x' },
   };
-  assert_equal(living_neighbours_for(*world, 0) == 1, "0, 0 should return 1");
-  assert_equal(living_neighbours_for(*world, 1) == 2, "1, 0 should return 2");
-  assert_equal(living_neighbours_for(*world, 2) == 1, "2, 0 should return 1");
-  assert_equal(living_neighbours_for(*world, 3) == 1, "0, 1 should return 1");
-  assert_equal(living_neighbours_for(*world, 4) == 0, "1, 1 should return 0");
-  assert_equal(living_neighbours_for(*world, 5) == 1, "2, 1 should return 1");
-  assert_equal(living_neighbours_for(*world, 6) == 1, "0, 2 should return 1");
-  assert_equal(living_neighbours_for(*world, 7) == 0, "1, 2 should return 0");
-  assert_equal(living_neighbours_for(*world, 8) == 1, "2, 2 should return 1");
+  printf("FOUND: %d\n", living_neighbours_for(*world, 0));
+  assert_equal(living_neighbours_for(*world, 0) == 3, "0, 0 should return 3");
+  assert_equal(living_neighbours_for(*world, 1) == 4, "1, 0 should return 4");
+  assert_equal(living_neighbours_for(*world, 2) == 3, "2, 0 should return 3");
+  assert_equal(living_neighbours_for(*world, 3) == 4, "0, 1 should return 4");
+  assert_equal(living_neighbours_for(*world, 4) == 4, "1, 1 should return 4");
+  assert_equal(living_neighbours_for(*world, 5) == 4, "2, 1 should return 4");
+  assert_equal(living_neighbours_for(*world, 6) == 3, "0, 2 should return 3");
+  assert_equal(living_neighbours_for(*world, 7) == 4, "1, 2 should return 4");
+  assert_equal(living_neighbours_for(*world, 8) == 3, "2, 2 should return 3");
   return 0;
 }
 

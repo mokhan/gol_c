@@ -5,40 +5,43 @@
 #include <string.h>
 #include "gol.h"
 
-int alive(char value) {
-  return value == 'x' ? 1 : 0;
-};
+int alive(char value) { return value == 'x' ? 1 : 0; };
 
-int west_of(char* world, int index) {
-  if (index == 0 || index == 3 || index == 6) {
-    return alive(world[index + 2]);
-  }
-  return alive(world[index - 1]);
+int west_of(int index) {
+  if (index == 0 || index == 3 || index == 6) { return index + 2; }
+  return index - 1;
 }
 
-int east_of(char* world, int index) {
-  if (index == 2 || index == 5 || index == 8) {
-    return alive(world[index - 2]);
-  }
-  return alive(world[index + 1]);
+int east_of(int index) {
+  if (index == 2 || index == 5 || index == 8) { return index - 2; }
+  return index + 1;
 }
 
-int north_of(char* world, int index) {
-  if (index == 0 || index == 1 || index == 2) {
-    return alive(world[index + 6]);
-  }
-  return alive(world[index - 3]);
+int north_of(int index) {
+  if (index == 0 || index == 1 || index == 2) { return index + 6; }
+  return index - 3;
 }
 
-int south_of(char* world, int index) {
-  if (index == 6 || index == 7 || index == 8) {
-    return alive(world[index - 6]);
-  }
-  return alive(world[index + 3]);
+int south_of(int index) {
+  if (index == 6 || index == 7 || index == 8) { return index - 6; }
+  return index + 3;
 }
+
+int north_west_of(int index) { return west_of(north_of(index)); }
+int north_east_of(int index) { return east_of(north_of(index)); }
+int south_west_of(int index) { return west_of(south_of(index)); }
+int south_east_of(int index) { return east_of(south_of(index)); }
 
 int living_neighbours_for(char* world, int index){
-  return west_of(world, index) + east_of(world, index) + north_of(world, index) + south_of(world, index);
+  return alive(world[west_of(index)])
+    + alive(world[east_of(index)])
+    + alive(world[north_of(index)])
+    + alive(world[south_of(index)])
+    + alive(world[north_west_of(index)])
+    + alive(world[north_east_of(index)])
+    + alive(world[south_west_of(index)])
+    + alive(world[south_east_of(index)])
+    ;
 }
 
 char* evolve(char* world) {
