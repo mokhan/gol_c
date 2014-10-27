@@ -79,7 +79,6 @@ static char* it_returns_the_correct_number_of_living_neighbors() {
     { ' ', ' ', ' ' },
     { 'x', ' ', 'x' },
   };
-  printf("FOUND: %d\n", living_neighbours_for(*world, 0));
   assert_equal(living_neighbours_for(*world, 0) == 3, "0, 0 should return 3");
   assert_equal(living_neighbours_for(*world, 1) == 4, "1, 0 should return 4");
   assert_equal(living_neighbours_for(*world, 2) == 3, "2, 0 should return 3");
