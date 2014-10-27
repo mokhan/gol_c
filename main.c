@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
   int i = 0;
   while(1) {
     printf("GENERATION: %d\n", i);
-    print(new_world);
+    display(new_world);
     new_world = evolve(new_world);
     sleep(1);
     system("clear");

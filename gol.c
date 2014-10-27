@@ -43,12 +43,11 @@ char* evolve(char* world) {
   return result;
 }
 
-void print(char* world) {
+void display(char* world) {
   int number_of_cells = 9;
   for (int i = 0; i < number_of_cells; i++) {
-    char cell = world[i];
     if (i % 3 == 0) { printf("\n"); }
-    printf("%c", cell);
+    printf("%c", world[i]);
   }
   printf("\n");
 }
