@@ -3,12 +3,10 @@
 #include "gol.h"
 
 int main(int argc, char **argv) {
-  char world[3][3] = {
-    { 'x', 'x', 'x' },
-    { 'x', 'x', 'x' },
-    { 'x', 'x', 'x' },
-  };
+  World world = create_world(3, 3);
   system("clear");
-  evolve(world);
-  print(world);
+  /*for (int i = 0; i < 5; i++) {*/
+    /*evolve(world);*/
+    print(world);
+  /*}*/
 }

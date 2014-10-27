@@ -30,8 +30,8 @@ static char* any_live_cell_with_two_live_neighbours_lives_on_to_the_next_generat
     { ' ', ' ', ' ' },
     { ' ', ' ', ' ' },
   };
-  evolve(world);
-  assert_equal(world[0][1] == 'x', "should live because has 2 live neighbors");
+  char* new_world = evolve(world);
+  assert_equal(&new_world[0][1] == 'x', "should live because has 2 live neighbors");
   return 0;
 }
 
