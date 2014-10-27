@@ -46,9 +46,7 @@ int living_neighbours_for(char* world, int index){
 
 char* evolve(char* world) {
   int number_of_cells = 9;
-  char new_world[number_of_cells + 1];
-  memset(new_world, ' ', number_of_cells);
-  new_world[number_of_cells] = 0;
+  char new_world[number_of_cells];
   for (int i = 0; i < number_of_cells; i++) {
     int neighbours = living_neighbours_for(world, i);
     if (alive(world[i])) {
@@ -57,15 +55,16 @@ char* evolve(char* world) {
       new_world[i] = neighbours == 3 ? 'x' : ' ';
     }
   }
-  return new_world;
+  char* result = new_world;
+  return result;
 }
 
 void print(char* world) {
   int number_of_cells = 9;
   for (int i = 0; i < number_of_cells; i++) {
     char cell = world[i];
-    if (i % 3 == 0) { printf("\n---\n"); }
+    if (i % 3 == 0) { printf("\n"); }
     printf("%c", cell);
   }
-  printf("\n---\n");
+  printf("\n");
 }
