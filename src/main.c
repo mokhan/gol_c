@@ -37,6 +37,8 @@ int main(int argc, char **argv) {
 
   srand(time(NULL));
   clear_screen();
+  printf("%d x %d world\n", WIDTH, HEIGHT);
+  sleep(2);
 
   char* new_world = random_world();
   int i = 0;
@@ -44,7 +46,9 @@ int main(int argc, char **argv) {
   while(1) {
     printf("GENERATION: %d\n", i);
     display(new_world);
-    new_world = evolve(new_world);
+    char* tmp = evolve(new_world);
+    free(new_world);
+    new_world = tmp;
     sleep(1);
     clear_screen();
     ++i;
