@@ -3,6 +3,9 @@
 #include "gol.h"
 
 int tests_run = 0;
+const int WIDTH = 3;
+const int HEIGHT = 3;
+const int NUMBER_OF_CELLS=WIDTH*HEIGHT;
 
 static char* test_foo() {
   int foo = 7;

@@ -4,6 +4,10 @@
 #include <time.h>
 #include "gol.h"
 
+const int WIDTH = 5;
+const int HEIGHT = 5;
+const int NUMBER_OF_CELLS=WIDTH*HEIGHT;
+
 int random_life() {
   return rand() % 2 == 0 ? ALIVE : DEAD;
 }
