@@ -5,14 +5,14 @@
 #include <string.h>
 #include "gol.h"
 
-static const int NUMBER_OF_CELLS=9;
+int alive(char value) { return value == ALIVE ? 1 : 0; };
 
-int alive(char value) { return value == 'x' ? 1 : 0; };
-
-int west_of(int index) { return (index == 0 || index == 3 || index == 6) ?  index + 2 : index - 1; }
-int east_of(int index) { return (index == 2 || index == 5 || index == 8) ? index - 2 : index + 1; }
-int north_of(int index) { return (index == 0 || index == 1 || index == 2) ? index + 6 : index - 3; }
-int south_of(int index) { return (index == 6 || index == 7 || index == 8) ? index - 6 : index + 3; }
+int west_of(int index) { return (index % WIDTH == 0) ?  index + (WIDTH-1) : index - 1; }
+int east_of(int index) { return (index % WIDTH == (WIDTH-1)) ? index - (WIDTH-1) : index + 1; }
+int north_of(int index) { return (index % WIDTH == index) ? NUMBER_OF_CELLS - WIDTH : index - WIDTH; }
+int south_of(int index) { 
+  return (index >= (NUMBER_OF_CELLS - WIDTH)) ? index - (NUMBER_OF_CELLS - HEIGHT) : index + WIDTH;
+}
 int north_west_of(int index) { return west_of(north_of(index)); }
 int north_east_of(int index) { return east_of(north_of(index)); }
 int south_west_of(int index) { return west_of(south_of(index)); }
@@ -46,7 +46,7 @@ char* evolve(char* world) {
 
 void display(char* world) {
   for (int i = 0; i < NUMBER_OF_CELLS; i++) {
-    if (i % 3 == 0) { printf("\n"); }
+    if (i % WIDTH == 0) { printf("\n"); }
     printf("%c", world[i]);
   }
   printf("\n");

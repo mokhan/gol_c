@@ -9,8 +9,8 @@ int random_life() {
 }
 
 char* random_world(){
-  char *world = malloc(sizeof(char) * 9);
-  for (int i = 0; i < 9; i++) {
+  char *world = malloc(sizeof(char) * NUMBER_OF_CELLS);
+  for (int i = 0; i < NUMBER_OF_CELLS; i++) {
     world[i] = random_life();
   }
   return world;
