@@ -5,6 +5,8 @@
 #include <string.h>
 #include "gol.h"
 
+static const int NUMBER_OF_CELLS=9;
+
 int alive(char value) { return value == 'x' ? 1 : 0; };
 
 int west_of(int index) { return (index == 0 || index == 3 || index == 6) ?  index + 2 : index - 1; }
@@ -29,23 +31,21 @@ int living_neighbours_for(char* world, int index){
 }
 
 char* evolve(char* world) {
-  int number_of_cells = 9;
-  char* new_world = malloc(sizeof(char) * number_of_cells);
-  memset(new_world, 0, sizeof(char) * number_of_cells);
-  for (int i = 0; i < number_of_cells; i++) {
+  char* new_world = malloc(sizeof(char) * NUMBER_OF_CELLS);
+  memset(new_world, 0, sizeof(char) * NUMBER_OF_CELLS);
+  for (int i = 0; i < NUMBER_OF_CELLS; i++) {
     int neighbours = living_neighbours_for(world, i);
     if (alive(world[i])) {
-      new_world[i] = (neighbours >= 2 && neighbours <= 3) ? 'x' : ' ';
+      new_world[i] = (neighbours >= 2 && neighbours <= 3) ? ALIVE : DEAD;
     } else {
-      new_world[i] = neighbours == 3 ? 'x' : ' ';
+      new_world[i] = neighbours == 3 ? ALIVE : DEAD;
     }
   }
   return new_world;
 }
 
 void display(char* world) {
-  int number_of_cells = 9;
-  for (int i = 0; i < number_of_cells; i++) {
+  for (int i = 0; i < NUMBER_OF_CELLS; i++) {
     if (i % 3 == 0) { printf("\n"); }
     printf("%c", world[i]);
   }
