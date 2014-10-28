@@ -41,6 +41,7 @@ char* evolve(char* world) {
       new_world[i] = neighbours == 3 ? ALIVE : DEAD;
     }
   }
+  free(world);
   return new_world;
 }
 
