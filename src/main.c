@@ -8,6 +8,10 @@ int WIDTH = 5;
 int HEIGHT = 5;
 int NUMBER_OF_CELLS;
 
+void clear_screen(){
+  system("clear");
+}
+
 int random_life() {
   return rand() % 2 == 0 ? ALIVE : DEAD;
 }
@@ -32,7 +36,7 @@ int main(int argc, char **argv) {
   NUMBER_OF_CELLS=WIDTH*HEIGHT;
 
   srand(time(NULL));
-  system("clear");
+  clear_screen();
 
   char* new_world = random_world();
   int i = 0;
@@ -42,7 +46,7 @@ int main(int argc, char **argv) {
     display(new_world);
     new_world = evolve(new_world);
     sleep(1);
-    system("clear");
+    clear_screen();
     ++i;
   }
 }
