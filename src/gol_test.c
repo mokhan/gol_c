@@ -3,9 +3,9 @@
 #include "gol.h"
 
 int tests_run = 0;
-const int WIDTH = 3;
-const int HEIGHT = 3;
-const int NUMBER_OF_CELLS=WIDTH*HEIGHT;
+int WIDTH = 3;
+int HEIGHT = 3;
+int NUMBER_OF_CELLS;
 
 static char* test_foo() {
   int foo = 7;
@@ -106,6 +106,8 @@ static char* all_tests() {
 }
 
 int main(int argc, char **argv) {
+  NUMBER_OF_CELLS=WIDTH*HEIGHT;
+
   char *result = all_tests();
   if (result != 0) {
     printf("FAILED: %s\n", result);

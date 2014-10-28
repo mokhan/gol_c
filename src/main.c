@@ -4,9 +4,9 @@
 #include <time.h>
 #include "gol.h"
 
-const int WIDTH = 5;
-const int HEIGHT = 5;
-const int NUMBER_OF_CELLS=WIDTH*HEIGHT;
+int WIDTH = 5;
+int HEIGHT = 5;
+int NUMBER_OF_CELLS;
 
 int random_life() {
   return rand() % 2 == 0 ? ALIVE : DEAD;
@@ -20,7 +20,17 @@ char* random_world(){
   return world;
 }
 
+int from_env(char* env_name, int default_value) {
+  char* value = getenv(env_name);
+  if(value != NULL) { return atoi(value); }
+  return default_value;
+}
+
 int main(int argc, char **argv) {
+  WIDTH=from_env("WIDTH", 5);
+  HEIGHT=from_env("HEIGHT", WIDTH);
+  NUMBER_OF_CELLS=WIDTH*HEIGHT;
+
   srand(time(NULL));
   system("clear");
 
