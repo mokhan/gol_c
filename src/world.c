@@ -13,6 +13,10 @@ Cell* cell_create(int number_of_cells) {
   return cells;
 }
 
+int world_number_of_cells(World *world) {
+  return world->width * world->height;
+}
+
 World *world_create(int width, int height) {
   int number_of_cells = width*height;
   World *world = (World *)malloc(sizeof(World));
@@ -21,5 +25,13 @@ World *world_create(int width, int height) {
   world->width = width;
   world->height = height;
   world->cells = cell_create(number_of_cells);
+  return world;
+}
+
+World* world_evolve(World *world) {
+  int number_of_cells = world_number_of_cells(world);
+  for (int i = 0; i < number_of_cells; i++) {
+    world->cells[sizeof(Cell) * i].alive = false;
+  }
   return world;
 }

@@ -1,4 +1,3 @@
 *.out
 *.dSYM
-gol
-gol_test
+bin
