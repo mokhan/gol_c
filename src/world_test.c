@@ -16,9 +16,15 @@ void test_world_create() {
   assert(height == world->height);
 }
 
+void test_world_create_should_create_all_cells(){
+  World *world = world_create(1, 1);
+  assert(false == world->cells[0].alive);
+}
+
 int main()
 {
   run_test(test_world_create);
+  run_test(test_world_create_should_create_all_cells);
   printf("\nOK\n");
   return 0;
 }
