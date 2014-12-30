@@ -3,8 +3,6 @@
 #include <string.h>
 #include "world.h"
 
-int world_number_of_cells(World *world);
-
 int west_of(World *world, int index) {
   return (index % world->width == 0) ? index + (world->width-1) : index - 1;
 }
