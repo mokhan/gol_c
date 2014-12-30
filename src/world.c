@@ -3,9 +3,7 @@
 #include <string.h>
 #include "world.h"
 
-int world_number_of_cells(World *world) {
-  return world->width * world->height;
-}
+int world_number_of_cells(World *world);
 
 int west_of(World *world, int index) {
   return (index % world->width == 0) ? index + (world->width-1) : index - 1;
@@ -37,6 +35,10 @@ int south_west_of(World *world, int index) {
 
 int south_east_of(World *world, int index) {
   return east_of(world, south_of(world, index));
+}
+
+int world_number_of_cells(World *world) {
+  return world->width * world->height;
 }
 
 Cell* world_cell_at(World *world, int index) {
