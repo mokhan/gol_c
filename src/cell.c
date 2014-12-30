@@ -13,6 +13,6 @@ Cell* cell_create(int number_of_cells) {
   return cells;
 }
 
-int cell_alive(Cell cell) { 
-  return cell.alive == true ? 1 : 0; 
+int cell_alive(Cell *cell) {
+  return cell->alive ? 1 : 0;
 };

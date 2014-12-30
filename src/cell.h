@@ -5,4 +5,4 @@ typedef struct {
 } Cell;
 
 Cell* cell_create(int number_of_cells);
-int cell_alive(Cell cell);
+int cell_alive(Cell *cell);

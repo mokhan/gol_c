@@ -39,19 +39,19 @@ int south_east_of(World *world, int index) {
   return east_of(world, south_of(world, index));
 }
 
-Cell world_cell_at(World *world, int index) {
-  return world->cells[sizeof(Cell) * index];
+Cell* world_cell_at(World *world, int index) {
+  return &world->cells[sizeof(Cell) * index];
 }
 
 int world_neighbours(World *world, int index) {
-  Cell west_cell = world_cell_at(world, west_of(world, index));
-  Cell east_cell = world_cell_at(world, east_of(world, index));
-  Cell north_cell = world_cell_at(world, north_of(world, index));
-  Cell south_cell = world_cell_at(world, south_of(world, index));
-  Cell north_west_cell = world_cell_at(world, north_west_of(world, index));
-  Cell north_east_cell = world_cell_at(world, north_east_of(world, index));
-  Cell south_west_cell = world_cell_at(world, south_west_of(world, index));
-  Cell south_east_cell = world_cell_at(world, south_east_of(world, index));
+  Cell *west_cell = world_cell_at(world, west_of(world, index));
+  Cell *east_cell = world_cell_at(world, east_of(world, index));
+  Cell *north_cell = world_cell_at(world, north_of(world, index));
+  Cell *south_cell = world_cell_at(world, south_of(world, index));
+  Cell *north_west_cell = world_cell_at(world, north_west_of(world, index));
+  Cell *north_east_cell = world_cell_at(world, north_east_of(world, index));
+  Cell *south_west_cell = world_cell_at(world, south_west_of(world, index));
+  Cell *south_east_cell = world_cell_at(world, south_east_of(world, index));
 
   return cell_alive(west_cell)
     + cell_alive(east_cell)
