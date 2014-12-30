@@ -89,3 +89,12 @@ World* world_evolve(World *world) {
   }
   return new_world;
 }
+
+void world_print(World *world) {
+  int number_of_cells = world_number_of_cells(world);
+  for (int i = 0; i < number_of_cells; i++) {
+    if (i % world->width == 0) { printf("\n"); }
+    printf("%s", world->cells[i].alive ? "X" : " ");
+  }
+  printf("\n");
+}
