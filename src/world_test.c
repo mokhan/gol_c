@@ -28,9 +28,9 @@ void any_live_cell_with_fewer_than_two_live_neighbours_dies_as_if_caused_by_unde
   World *world = world_create(3, 3);
   world->cells[0].alive = true;
 
-  world_evolve(world);
-  assert(false == world->cells[0].alive);
-  assert(false == world->cells[8].alive);
+  World *new_world = world_evolve(world);
+  assert(false == new_world->cells[0].alive);
+  assert(false == new_world->cells[8].alive);
 }
 
 void any_live_cell_with_two_live_neighbours_lives_on_to_the_next_generation() {
@@ -69,6 +69,10 @@ void any_live_cell_with_more_than_three_live_neighbours_dies_as_if_by_overcrowdi
   world->cells[4].alive = true;
   world->cells[5].alive = true;
   world->cells[7].alive = true;
+
+  assert(5 == world_neighbours(world, 0));
+  assert(4 == world_neighbours(world, 1));
+  assert(4 == world_neighbours(world, 4));
 
   World* new_world = world_evolve(world);
   assert(false == new_world->cells[4].alive);
