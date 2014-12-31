@@ -18,7 +18,7 @@ void test_world_create() {
 
 void test_world_create_should_create_all_cells(){
   World *world = world_create(1, 1);
-  assert(false == world->cells[0].alive);
+  assert(false == world_cell_at(world, 0)->alive);
 }
 
 void any_live_cell_with_fewer_than_two_live_neighbours_dies_as_if_caused_by_under_population() {
