@@ -63,7 +63,7 @@ int world_neighbours(World *world, int index) {
     + cell_alive(south_east_cell);
 }
 
-World *world_create(int width, int height) {
+World* world_create(int width, int height) {
   int number_of_cells = width*height;
   World *world = (World *)malloc(sizeof(World));
   memset(world, 0, sizeof(World));
@@ -74,10 +74,21 @@ World *world_create(int width, int height) {
   return world;
 }
 
+int random_life() {
+  return rand() % 2 == 0 ? true : false;
+}
+
+World* world_random(int width, int height){
+  World *world = world_create(width, height);
+  for (int i = 0; i < world_number_of_cells(world); i++) {
+    world_cell_at(world, i)->alive = random_life();
+  }
+  return world;
+}
+
 World* world_evolve(World *world) {
-  int number_of_cells = world_number_of_cells(world);
   World *new_world = world_create(world->width, world->height);
-  for (int i = 0; i < number_of_cells; i++) {
+  for (int i = 0; i < world_number_of_cells(world); i++) {
     int neighbours = world_neighbours(world, i);
     if (world->cells[i*sizeof(Cell)].alive == true) {
       new_world->cells[i].alive = (neighbours >= 2 && neighbours <= 3) ? true : false;
@@ -89,10 +100,13 @@ World* world_evolve(World *world) {
 }
 
 void world_print(World *world) {
-  int number_of_cells = world_number_of_cells(world);
-  for (int i = 0; i < number_of_cells; i++) {
+  for (int i = 0; i < world_number_of_cells(world); i++) {
     if (i % world->width == 0) { printf("\n"); }
     printf("%s", world->cells[i].alive ? "X" : " ");
   }
   printf("\n");
+}
+
+void world_destroy(World *world) {
+  free(world);
 }
