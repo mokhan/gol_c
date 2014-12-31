@@ -95,7 +95,8 @@ World* world_evolve(World *old_world) {
 
   for (int i = 0; i < world_number_of_cells(old_world); i++) {
     int neighbours = world_neighbours(old_world, i);
-    cell_change_life(world_cell_at(new_world, i), (world_cell_at(old_world, i)->alive && neighbours == 2) || neighbours == 3);
+    bool lives = (world_cell_at(old_world, i)->alive && neighbours == 2) || neighbours == 3;
+    cell_change_life(world_cell_at(new_world, i), lives);
   }
 
   return new_world;
