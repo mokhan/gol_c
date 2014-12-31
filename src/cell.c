@@ -23,5 +23,5 @@ void cell_change_life(Cell *cell, bool alive) {
 }
 
 void cell_print(Cell *cell) {
-  printf("%s", cell->alive ? "X" : " ");
+  printf("%s", cell->alive ? "O" : " ");
 }

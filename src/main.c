@@ -8,8 +8,8 @@ void clear_screen(){
   system("clear");
 }
 
-int from_env(char* env_name, int default_value) {
-  char* value = getenv(env_name);
+int env_fetch(char* env_name, int default_value) {
+  char *value = getenv(env_name);
   return (value != NULL) ? atoi(value) : default_value;
 }
 
@@ -35,8 +35,8 @@ void world_start(World *world) {
 }
 
 int main(int argc, char **argv) {
-  int width = from_env("WIDTH", 5);
-  int height = from_env("HEIGHT", width);
+  int width = env_fetch("COLUMNS", 5);
+  int height = env_fetch("LINES", width);
 
   world_start(world_random(width, height));
   return 0;
