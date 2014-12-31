@@ -2,6 +2,7 @@
 
 typedef struct {
   bool alive;
+  //int index;
 } Cell;
 
 Cell* cell_create(int number_of_cells);

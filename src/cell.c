@@ -9,6 +9,7 @@ Cell* cell_create(int number_of_cells) {
 
   for (int i = 0; i < number_of_cells; i++) {
     cells[sizeof(Cell) * i].alive = false;
+    /*cells[sizeof(Cell) * i].index = i;*/
   }
   return cells;
 }

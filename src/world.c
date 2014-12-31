@@ -105,6 +105,7 @@ World* world_evolve(World *world) {
 }
 
 void world_print(World *world) {
+  /*world_each(world, cell_print);*/
   for (int i = 0; i < world_number_of_cells(world); i++) {
     if (i % world->width == 0) { printf("\n"); }
     cell_print(&world->cells[i]);
