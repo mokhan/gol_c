@@ -92,6 +92,7 @@ World* world_random(int width, int height){
 
 World* world_evolve(World *world) {
   World *new_world = world_create(world->width, world->height);
+
   for (int i = 0; i < world_number_of_cells(world); i++) {
     int neighbours = world_neighbours(world, i);
     if (world->cells[i*sizeof(Cell)].alive == true) {
@@ -106,7 +107,7 @@ World* world_evolve(World *world) {
 void world_print(World *world) {
   for (int i = 0; i < world_number_of_cells(world); i++) {
     if (i % world->width == 0) { printf("\n"); }
-    printf("%s", world->cells[i].alive ? "X" : " ");
+    cell_print(&world->cells[i]);
   }
   printf("\n");
 }

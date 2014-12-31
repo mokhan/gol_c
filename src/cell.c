@@ -20,3 +20,7 @@ int cell_alive(Cell *cell) {
 void cell_change_life(Cell *cell, bool alive) {
   cell->alive = alive;
 }
+
+void cell_print(Cell *cell) {
+  printf("%s", cell->alive ? "X" : " ");
+}

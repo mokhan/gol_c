@@ -3,7 +3,6 @@
 #include <unistd.h>
 #include <time.h>
 #include "world.h"
-#include "display.h"
 
 void clear_screen(){
   system("clear");
