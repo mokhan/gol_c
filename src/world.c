@@ -66,6 +66,7 @@ int world_neighbours(World *world, int index) {
 World* world_create(int width, int height) {
   int number_of_cells = width*height;
   World *world = (World *)malloc(sizeof(World));
+
   memset(world, 0, sizeof(World));
 
   world->width = width;
