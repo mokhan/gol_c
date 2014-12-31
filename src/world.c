@@ -95,17 +95,13 @@ World* world_evolve(World *world) {
 
   for (int i = 0; i < world_number_of_cells(world); i++) {
     int neighbours = world_neighbours(world, i);
-    if (world->cells[i*sizeof(Cell)].alive == true) {
-      new_world->cells[i].alive = (neighbours >= 2 && neighbours <= 3) ? true : false;
-    } else {
-      new_world->cells[i].alive = neighbours == 3 ? true : false;
-    }
+    cell_change_life(world_cell_at(new_world, i), (world_cell_at(world, i)->alive && neighbours == 2) || neighbours == 3);
   }
+
   return new_world;
 }
 
 void world_print(World *world) {
-  /*world_each(world, cell_print);*/
   for (int i = 0; i < world_number_of_cells(world); i++) {
     if (i % world->width == 0) { printf("\n"); }
     cell_print(&world->cells[i]);
