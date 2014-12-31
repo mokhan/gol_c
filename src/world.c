@@ -90,12 +90,12 @@ World* world_random(int width, int height){
   return world;
 }
 
-World* world_evolve(World *world) {
-  World *new_world = world_create(world->width, world->height);
+World* world_evolve(World *old_world) {
+  World *new_world = world_create(old_world->width, old_world->height);
 
-  for (int i = 0; i < world_number_of_cells(world); i++) {
-    int neighbours = world_neighbours(world, i);
-    cell_change_life(world_cell_at(new_world, i), (world_cell_at(world, i)->alive && neighbours == 2) || neighbours == 3);
+  for (int i = 0; i < world_number_of_cells(old_world); i++) {
+    int neighbours = world_neighbours(old_world, i);
+    cell_change_life(world_cell_at(new_world, i), (world_cell_at(old_world, i)->alive && neighbours == 2) || neighbours == 3);
   }
 
   return new_world;
