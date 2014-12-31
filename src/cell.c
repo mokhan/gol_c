@@ -16,3 +16,7 @@ Cell* cell_create(int number_of_cells) {
 int cell_alive(Cell *cell) {
   return cell->alive ? 1 : 0;
 };
+
+void cell_change_life(Cell *cell, bool alive) {
+  cell->alive = alive;
+}

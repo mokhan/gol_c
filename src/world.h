@@ -6,6 +6,8 @@ typedef struct {
   Cell* cells;
 } World;
 
+typedef void (*each_cell)(Cell *cell);
+
 World* world_create(int width, int height);
 World* world_random(int width, int height);
 World* world_evolve(World* world);

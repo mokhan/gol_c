@@ -74,15 +74,19 @@ World* world_create(int width, int height) {
   return world;
 }
 
-int random_life() {
-  return rand() % 2 == 0 ? true : false;
+void world_each(World *world, each_cell callback){
+  for (int i = 0; i < world_number_of_cells(world); i++) {
+    callback(&world->cells[i]);
+  }
+}
+
+void choose_random_life(Cell *cell){
+  cell_change_life(cell, rand() % 2 == 0 ? true : false);
 }
 
 World* world_random(int width, int height){
   World *world = world_create(width, height);
-  for (int i = 0; i < world_number_of_cells(world); i++) {
-    world_cell_at(world, i)->alive = random_life();
-  }
+  world_each(world, choose_random_life);
   return world;
 }
 
