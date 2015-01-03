@@ -6,7 +6,7 @@ exe=./bin/game_of_life
 test_exe=./bin/game_of_life_test
 
 all: $(objects) main.o
-	$(CC) $(CFLAGS) -o bin/game_of_life $(objects) main.o
+	$(CC) $(CFLAGS) -o $(exe) $(objects) main.o
 	$(exe)
 
 clean:
