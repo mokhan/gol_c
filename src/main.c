@@ -2,55 +2,42 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
-#include "gol.h"
-
-int WIDTH = 5;
-int HEIGHT = 5;
-int NUMBER_OF_CELLS;
+#include "world.h"
 
 void clear_screen(){
   system("clear");
 }
 
-int random_life() {
-  return rand() % 2 == 0 ? ALIVE : DEAD;
+int env_fetch(char* env_name, int default_value) {
+  char *value = getenv(env_name);
+  return (value != NULL) ? atoi(value) : default_value;
 }
 
-char* random_world(){
-  char *world = malloc(sizeof(char) * NUMBER_OF_CELLS);
-  for (int i = 0; i < NUMBER_OF_CELLS; i++) {
-    world[i] = random_life();
-  }
-  return world;
-}
-
-int from_env(char* env_name, int default_value) {
-  char* value = getenv(env_name);
-  if(value != NULL) { return atoi(value); }
-  return default_value;
-}
-
-int main(int argc, char **argv) {
-  WIDTH=from_env("WIDTH", 5);
-  HEIGHT=from_env("HEIGHT", WIDTH);
-  NUMBER_OF_CELLS=WIDTH*HEIGHT;
-
+void world_start(World *world) {
   srand(time(NULL));
   clear_screen();
-  printf("%d x %d world\n", WIDTH, HEIGHT);
+  printf("%d x %d world\n", world->width, world->height);
   sleep(2);
 
-  char* new_world = random_world();
+  World *new_world = world;
   int i = 0;
 
-  while(1) {
+  while(true) {
     printf("GENERATION: %d\n", i);
-    display(new_world);
-    char* tmp = evolve(new_world);
-    free(new_world);
+    world_print(new_world);
+    World *tmp = world_evolve(new_world);
+    world_destroy(new_world);
     new_world = tmp;
     sleep(1);
     clear_screen();
     ++i;
   }
+}
+
+int main(int argc, char **argv) {
+  int width = env_fetch("COLUMNS", 5);
+  int height = env_fetch("LINES", width);
+
+  world_start(world_random(width, height));
+  return 0;
 }
