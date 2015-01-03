@@ -1,5 +1,5 @@
 SHELL=/bin/sh
-CFLAGS=-Wall -g -std=c99
+CFLAGS=-Wall -g -std=c99 -Isrc
 objects=cell.o world.o
 test_objects=world_test.o
 exe=./bin/game_of_life
@@ -25,5 +25,5 @@ cell.o: src/cell.c src/cell.h
 world.o: src/world.c src/world.h
 	$(CC) $(CFLAGS) -c src/world.c
 
-world_test.o: src/world_test.c src/world.h
-	$(CC) $(CFLAGS) -c src/world_test.c
+world_test.o: test/world_test.c src/world.h
+	$(CC) $(CFLAGS) -c test/world_test.c
