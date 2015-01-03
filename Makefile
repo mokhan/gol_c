@@ -1,21 +1,24 @@
 SHELL=/bin/sh
 CFLAGS=-Wall -g -std=c99
+objects=cell.o world.o
+test_objects=world_test.o
+exe=./bin/game_of_life
+test_exe=./bin/game_of_life_test
 
-all: src/*.c src/*.h
-	rm -fr bin
-	mkdir -p bin
-	$(CC) $(CFLAGS) -std=c99 -o bin/game_of_life src/main.c src/world.c src/cell.c
-	./bin/game_of_life
+all: $(objects) main.o
+	$(CC) $(CFLAGS) -o bin/game_of_life $(objects) main.o
+	$(exe)
 
 clean:
-	rm -fr bin
-
-init:
 	mkdir -p bin
+	rm -fr $(exe) $(test_exe) $(objects) $(test_objects)
 
-test: cell.o world.o world_test.o
-	$(CC) $(CFLAGS) -o bin/test_game_of_life src/world.o src/cell.o src/world_test.o
-	./bin/test_game_of_life
+test: $(objects) $(test_objects)
+	$(CC) $(CFLAGS) -o $(test_exe) $(objects) $(test_objects)
+	$(test_exe)
+
+main.o: src/main.c src/world.h
+	$(CC) $(CFLAGS) -c src/main.c
 
 cell.o: src/cell.c src/cell.h
 	$(CC) $(CFLAGS) -c src/cell.c
