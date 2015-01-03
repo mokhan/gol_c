@@ -10,7 +10,6 @@ all: $(objects) main.o
 	$(exe)
 
 clean:
-	mkdir -p bin
 	rm -fr $(exe) $(test_exe) $(objects) $(test_objects)
 
 test: $(objects) $(test_objects)
