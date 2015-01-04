@@ -10,7 +10,7 @@ all: $(objects) main.o
 	$(exe)
 
 clean:
-	rm -fr $(exe) $(test_exe) $(objects) $(test_objects)
+	rm -fr $(exe) $(test_exe) $(objects) main.o $(test_objects) test_main.o
 
 test: $(objects) $(test_objects)
 	$(CC) $(CFLAGS) -o $(test_exe) $(objects) $(test_objects)
