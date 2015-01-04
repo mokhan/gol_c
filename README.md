@@ -25,3 +25,7 @@ To run the test suite.
 ```bash
   $ make test
 ```
+
+DEMO
+
+![demo](https://cloud.githubusercontent.com/assets/80475/5604268/fd77a624-936e-11e4-9a79-95f4d3fe677b.gif)
