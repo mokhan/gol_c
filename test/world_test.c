@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
-#include "world.h"
-
-#define run_test(function_name)\
-  printf("%s\n", #function_name);\
-function_name();
+#include "main.h"
 
 void test_world_create() {
   int width = 3;
@@ -112,8 +107,7 @@ void it_returns_the_correct_number_of_living_neighbors() {
   assert(world_neighbours(world, 8) == 3);
 }
 
-int main()
-{
+void world_tests() {
   run_test(test_world_create);
   run_test(test_world_create_should_create_all_cells);
   run_test(any_live_cell_with_fewer_than_two_live_neighbours_dies_as_if_caused_by_under_population);
@@ -122,7 +116,5 @@ int main()
   run_test(any_live_cell_with_more_than_three_live_neighbours_dies_as_if_by_overcrowding);
   run_test(any_dead_cell_with_exactly_three_live_neighbours_becomes_a_live_cell_as_if_by_reproduction);
   run_test(it_returns_the_correct_number_of_living_neighbors);
-
-  printf("\nOK\n");
-  return 0;
 }
+
