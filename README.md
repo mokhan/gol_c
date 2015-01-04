@@ -13,11 +13,11 @@ make task will run the program with a 5x5 world.
   $ make
 ```
 
-To customize the size of the world you can export the ROWS and COLUMNS
+To customize the size of the world you can export the LINES and COLUMNS
 environment variables.
 
 ```bash
-  $ ROWS=25 COLUMNS=80 make
+  $ LINES=25 COLUMNS=80 make
 ```
 
 To run the test suite.
