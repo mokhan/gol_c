@@ -1,16 +1,32 @@
-CFLAGS=-Wall -g
+SHELL=/bin/sh
+CFLAGS=-Wall -g -std=c99 -Isrc
+objects=cell.o world.o
+test_objects=world_test.o test_main.o
+exe=./bin/game_of_life
+test_exe=./bin/game_of_life_test
 
-default: src/*.c src/*.h
-	rm -fr bin
-	mkdir -p bin
-	gcc -std=c99 -o bin/game_of_life src/main.c src/world.c src/cell.c
-	./bin/game_of_life
+all: $(objects) main.o
+	$(CC) $(CFLAGS) -o $(exe) $(objects) main.o
+	$(exe)
 
 clean:
-	rm -fr bin
+	rm -fr $(exe) $(test_exe) $(objects) $(test_objects)
 
-test: src/*.c src/*.h
-	rm -fr bin
-	mkdir -p bin
-	gcc -std=c99 -o bin/test_game_of_life src/world_test.c src/world.c src/cell.c
-	./bin/test_game_of_life
+test: $(objects) $(test_objects)
+	$(CC) $(CFLAGS) -o $(test_exe) $(objects) $(test_objects)
+	$(test_exe)
+
+main.o: src/main.c src/world.h
+	$(CC) $(CFLAGS) -c src/main.c
+
+cell.o: src/cell.c src/cell.h
+	$(CC) $(CFLAGS) -c src/cell.c
+
+world.o: src/world.c src/world.h
+	$(CC) $(CFLAGS) -c src/world.c
+
+world_test.o: test/world_test.c src/world.h
+	$(CC) $(CFLAGS) -c test/world_test.c
+
+test_main.o: test/main.c test/main.h
+	$(CC) $(CFLAGS) -c test/main.c -o test_main.o
